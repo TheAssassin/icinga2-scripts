@@ -1,0 +1,10 @@
+# Copy this file to config.yml and add your own domain configurations.
+# Supported keys: expect, uri, hostname
+# See https://www.monitoring-plugins.org/doc/man/check_http.html for details.
+
+vhosts:
+    subdomain.example.net:
+      expect: 404
+
+exclude_vhosts:
+  - localhost
