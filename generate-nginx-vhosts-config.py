@@ -54,7 +54,10 @@ def read_config() -> dict:
     }
 
     config_path = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "config.yml")
+        os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            "config.yml"
+        )
     )
 
     try:
