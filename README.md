@@ -29,6 +29,15 @@ be found in the
 
 ### Install
 
+The script has a few runtime dependencies, for which Ubuntu, Debian and most
+likely all the other major distributions provide packages.
+
+Ubuntu/Debian:
+
+```
+> sudo apt install python3-yaml python3-jinja2
+```
+
 To install these scripts, you will have to clone this repository to a location
 on your server, e.g., `/srv` or `/opt`.
 
