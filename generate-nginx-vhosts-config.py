@@ -25,6 +25,9 @@ vars.http_vhosts["{{hostname}}"] = {
 """
 
 
+DEBUG = os.getenv("DEBUG", None)
+
+
 def get_vhosts() -> List[str]:
     vhosts = set()
 
@@ -97,12 +100,10 @@ def render(vhost: str) -> str:
 def main():
     vhosts = get_vhosts()
 
-    debug = os.environ.get("DEBUG", None)
-
     f = None
 
     try:
-        if debug:
+        if DEBUG:
             # overwrite f with sys.stdout
             f = sys.stdout
         else:
@@ -129,10 +130,11 @@ def main():
         subprocess.check_output("service icinga2 reload".split())
 
     finally:
-        if not debug:
+        if not DEBUG:
             if f is not None:
                 f.close()
 
 
 if __name__ == "__main__":
     sys.exit(main())
+
