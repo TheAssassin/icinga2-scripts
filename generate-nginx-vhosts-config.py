@@ -41,6 +41,12 @@ def get_vhosts() -> List[str]:
     for i in read_config()["exclude_vhosts"]:
         vhosts.discard(i)
 
+    for vhost in list(vhosts):
+        if "*." in vhost:
+            # assumption: in a wildcard setup, the hostname _wildcard should be reachable
+            vhosts.remove(vhost)
+            vhosts.add(vhost.replace("*.", "_wildcard."))
+
     rv = list(vhosts)
     rv.sort()
     return rv
