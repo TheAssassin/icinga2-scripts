@@ -90,6 +90,9 @@ def render(vhost: str) -> str:
 
     vhosts = read_config()["vhosts"]
 
+    # if it's a wildcard host, assume 404 as default status
+    vars["expect"] = 404
+
     if vhost in vhosts:
         vars.update(vhosts[vhost])
 
