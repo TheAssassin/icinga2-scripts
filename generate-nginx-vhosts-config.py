@@ -15,7 +15,7 @@ from typing import List
 TEMPLATE = """
 vars.http_vhosts["{{hostname}}"] = {
   http_uri = "{{ uri }}"
-  http_vhost = "{{ hostname }}"
+  http_vhost = "{{ vhost | default(hostname) }}"
   http_ssl = {{ ssl | default('true') }}
   {% if expect %}
   http_expect = "{{ expect }}"
@@ -49,6 +49,10 @@ def get_vhosts() -> List[str]:
             # assumption: in a wildcard setup, the hostname _wildcard should be reachable
             vhosts.remove(vhost)
             vhosts.add(vhost.replace("*.", "_wildcard."))
+
+    for vhost in read_config()["vhosts"].keys():
+        if vhost not in vhosts:
+            vhosts.add(vhost)
 
     rv = list(vhosts)
     rv.sort()
