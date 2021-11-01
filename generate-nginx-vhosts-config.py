@@ -75,7 +75,7 @@ def read_config() -> dict:
 
     try:
         with open(config_path, "r") as f:
-            data = yaml.load(f.read())
+            data = yaml.load(f.read(), Loader=yaml.SafeLoader)
     except Exception as e:
         print("Warning: could not open configuration file {}: "
               "{}".format(config_path, repr(e)),
